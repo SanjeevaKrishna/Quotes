@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      background: #1a1a2e; /* fallback until JSON loads */
+    }
+
+    .card {
+      max-width: 600px;
+      margin: 20px;
+      padding: 60px 50px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 26px;
+      line-height: 1.6;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .author {
+      font-size: 16px;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="quote" id="quote">Loading...</div>
+    <div class="author" id="author"></div>
+  </div>
+
+  <script>
+    fetch('data.json')
+      .then(r => r.json())
+      .then(data => {
+        document.body.style.background   = data.background;
+        document.getElementById('quote').textContent  = '"' + data.quote + '"';
+        document.getElementById('author').textContent = '— ' + data.author;
+        document.getElementById('author').style.color = data.color;
+      });
+  </script>
+
+</body>
+</html>
